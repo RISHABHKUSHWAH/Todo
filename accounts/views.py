@@ -6,26 +6,40 @@ from django.shortcuts import render,redirect,HttpResponse
 
 # Create your views here.
 def login(request):
+    message = ""
+
     if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username = username ,password = password)
-        auth_login(request,user)
-        return redirect('http://127.0.0.1:8000')
-    return render(request,'login.html')    
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            auth_login(request, user)
+            return redirect('/')  # redirect to home page
+        else:
+            message = "Invalid username or password"
+
+    return render(request, 'login.html', {'message': message})
 
 def register(request):
+    message =''
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         conpassword = request.POST['conpassword']
         if password == conpassword:
-            obj = User(username =username ,password = password)
-            obj.save()
+            obj = User.objects.filter(username =username ,password = password)
+            if obj is None:
+                obj = User(username =username ,password = password)
+                obj.save()
+                print("in")
+            else:
+                message = "User is alredy registered...."
         else:
-            return HttpResponse("password and conf password are differnt")\
+            message = "password and conf password are differnt"
 
-    return render(request,'register.html')
+    return render(request,'register.html',{"message":message})
 
 def user_logout(request):
     user = request.user #current user ,id,first name
