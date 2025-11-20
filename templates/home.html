@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1 class='home-todo1'>Your Todo</h1>
+{% if user.is_authenticated %}
+<h2 class="home-todo2">wellcome</h2>
+<h2 class="home-todo3">The Benefits of Using Daily ToDo</h2>
+<p class="home-todo4">
+    Writing your daily tasks on a list can help you increase productivity and decrease stress.<br> 
+    To-do lists enable you to segment your goals into achievable activities and complete large <br>
+    projects by breaking them into smaller assignments. Recording tasks can allow you to better <br>
+    manage your time and encourages you to achieve more throughout your day. In this article,<br>
+    we discuss the benefits of having a daily to-do list, how it can boost your mental health,<br>
+    and provide tips on how to create an effective list.</p>
+{% else %}
+<a href="/login/" class="btn btn-primary start-button">Start</a>
+{% endif %}
+{% endblock %} 

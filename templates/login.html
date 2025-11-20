@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% comment %} <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+            id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> {% endcomment %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+        <title>login</title>
+    </head>
+
+    <body>
+        {% block body %}
+        <form method="post" action="">
+          {% csrf_token %}
+            <label>
+              <p class="label-txt">ENTER YOUR NAME</p>
+              <input type="text" name="username" class="input">
+              <div class="line-box">
+                <div class="line"></div>
+              </div>
+            </label>
+            <label>
+              <p class="label-txt">ENTER YOUR PASSWORD</p>
+              <input type="password" name="password" class="input">
+              <div class="line-box">
+                <div class="line"></div>
+              </div>
+            </label>
+            <button type="submit">submit</button>
+            <div >
+              Need an account?<a href="/register/">Register</a>
+            </div>
+          </form>
+          {% endblock %}
+    </body>
+
+</html>

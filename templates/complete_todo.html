@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+{% for i in complete %}
+<div class="list-group-item list-group-item-action list-group-item-danger col-md-4">
+    <s><b>{{ i.title }}</b>
+    {{ i.memo }} - {{ i.memo|truncatechars:10}}</s> 
+</div>
+<a href= "{% url 'delete' i.pk %}" class="btn btn-danger col-md-2">delete</a>
+{% endfor %}    
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block body %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+        <p> {{message}}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+</ul>
+<h1 class='home-todo1'> {{data.count}} Current Todos</h1>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="list-group">
+            {% for i in data %}
+
+            {% if i.is_complete == True %}
+            <a href="#" class="list-group-item list-group-item-action list-group-item-danger ">
+                <b>{{ i.title }}</b>
+                {{ i.memo }} - {{ i.memo|truncatechars:10}}</a>
+            <div class="comp-up">
+                <a href="{% url 'complete' i.pk %}" class="btn btn-primary col-md-2">complete</a>
+                <a href="{% url 'update' i.pk %}" class="btn btn-success col-md-2">update</a>
+            </div>
+            {% else %}
+            <a href="#" class="list-group-item list-group-item-action list-group-item-danger">
+                <b>{{ i.title }}</b>
+                {{ i.memo }} - {{ i.memo|truncatechars:10}}</a>
+            <div class="comp-up">
+                <a href="{% url 'complete' i.pk %}" class="btn btn-primary col-md-2">complete</a>
+                <a href="{% url 'update' i.pk %}" class="btn btn-success col-md-2">update</a>
+                <div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% endblock %}
